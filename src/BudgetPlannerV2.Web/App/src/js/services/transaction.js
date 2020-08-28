@@ -2,7 +2,7 @@
 
 export const transactionService = {
     getTransactions() {
-        return Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             window.setTimeout(() => {
                 resolve({
                     lastUpdated: Date(),
@@ -69,7 +69,7 @@ export const transactionService = {
                         type: "Out",
                         created: new Date(2020, 8, 25)
                     }]
-                })
+                });
             }, 1000);
         });
     }

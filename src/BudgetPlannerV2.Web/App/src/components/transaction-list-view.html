@@ -1,0 +1,27 @@
+<div class="card bg-dark">
+    <div class="card-body">
+        <spinner-loader :is-loading="!isTransactionsLoaded"></spinner-loader>
+        <budget-card v-on:budget:view="viewBudget(id)" view-mode="details" :budget-item="budget" v-show="isTransactionsLoaded">
+
+        </budget-card>
+        <table class="table table-dark table-sm table-striped table-bordered" v-show="isTransactionsLoaded">
+            <thead>
+                <tr>
+                    <th class="d-none d-sm-table-cell" scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                    <th class="d-none d-sm-table-cell" scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="bg-primary" colspan="4">28th July</td></tr>
+                <tr v-for="transaction in transactions">
+                    <th class="d-none d-sm-table-cell" scope="row">{{ transaction.id }}</th>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.amount | currency }}</td>
+                    <td class="d-none d-sm-table-cell">{{ transaction.created | customDate('DD MMM YYYY') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -27,11 +27,11 @@ const transactionModule = (vueInstance) => {
                     }
 
                     services.transactionService
-                        .getTransactions
-                        .then(() => {
-                            commit("loadTransactions", budgetTransactionResponse.data);
+                        .getTransactions()
+                        .then((response) => {
+                            commit("loadTransactions", response.data);
                             commit("setTransactionsLoadedFlag", true);
-                            resolve(budgetTransactionResponse.data);
+                            resolve(response.data);
                         });
                 });
             },

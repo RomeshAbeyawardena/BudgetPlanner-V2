@@ -1,4 +1,6 @@
-﻿const transactionListViewComponent = (vueInstance) => {
+﻿import Vuex from 'vuex';
+
+const transactionListViewComponent = (vueInstance) => {
     return {
         template: require('./../../components/transaction-list-view.html'),
         props: {

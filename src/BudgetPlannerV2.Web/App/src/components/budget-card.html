@@ -1,0 +1,20 @@
+<div class="card bg-primary text-light border-light" style="margin-top: 1rem;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title">{{ budget.name }}</h5>
+                <p v-show="isListViewMode" class="card-text">
+                    {{ budget.description }}
+                </p>
+            </div>
+            <div class="col text-right">
+                <p><span class="d-none d-sm-inline">Balance: </span>{{ budget.balance | currency }}</p>
+                <p v-show="isListViewMode" class="d-none d-md-block">Left to Spend {{ budget.availableToSpend | currency }}</p>
+                <a v-show="isListViewMode" class="btn btn-secondary align-bottom" v-on:click="viewBudget(budget.id)" href="#">View</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-secondary" v-show="isListViewMode && budget.modified > budget.created">
+        Last Updated: {{ budget.modified | date('DD MMM YYYY') }}
+    </div>
+</div>

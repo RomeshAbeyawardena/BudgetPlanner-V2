@@ -29,7 +29,9 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "vuex": "^3.5.1",
-    "type-ahead": "2.1.0"
+    "type-ahead": "2.1.0",
+    "moment": "2.27.0",
+    "accounting": "0.4.1"
   },
   "private": true
 }

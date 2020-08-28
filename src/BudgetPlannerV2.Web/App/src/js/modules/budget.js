@@ -25,7 +25,7 @@ const budgetModule = (vueInstance) => {
 
                     services.budgetService
                         .getBudgets()
-                        .then(() => {
+                        .then((response) => {
                             commit("loadBudget", response.data);
                             commit("setBudgetsLoadedFlag", true);
                             resolve(response.data);

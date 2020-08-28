@@ -1,0 +1,8 @@
+<div>
+    <spinner-loader :is-loading="!isBudgetLoaded"></spinner-loader>
+    <div v-show="isBudgetLoaded" v-for="budget in budgets">
+        <budget-card v-on:budget:view="viewBudget(budget.id)" view-mode="list" :budget-item="budget">
+
+        </budget-card>
+    </div>
+</div>

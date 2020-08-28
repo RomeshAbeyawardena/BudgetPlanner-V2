@@ -2,7 +2,7 @@
 
 export const budgetService = {
     getBudgets() {
-        return Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             window.setTimeout(() => {
                 resolve({
                     lastUpdated: Date(),
