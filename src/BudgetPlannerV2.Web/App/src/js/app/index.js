@@ -1,19 +1,17 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import utility from './../utility';
+import Vue from "vue";
+import Vuex from "vuex";
+import utility from "./../utility";
 
 import budgetCardComponent from "./../components/budget-card";
 import budgetListComponent from "./../components/budget-list";
 import transactionListViewComponent from "./../components/transaction-list-view";
 
-import budgetModule from "./../modules/budget";
+import modules from "./../modules";
 
 Vue.use(Vuex);
 
 const store = new Vuex.store({
-    modules: {
-        budget: budgetModule
-    },
+    modules: modules,
     actions: {
         
     }

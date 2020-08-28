@@ -1,4 +1,4 @@
-﻿import services from './../services';
+﻿import services from "./../services";
 
 const budgetModule = {
     state: {
@@ -10,7 +10,7 @@ const budgetModule = {
             state.budgetsLoaded = value;
         },
         loadBudget(state, budgets) {
-            Vue.set(state, 'budgets', budgets);
+            Vue.set(state, "budgets", budgets);
         }
     },
     actions: {

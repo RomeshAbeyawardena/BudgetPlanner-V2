@@ -1,4 +1,4 @@
-﻿import Promise from 'promise';
+﻿import Promise from "promise";
 
 export const budgetService = {
     getBudgets() {

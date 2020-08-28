@@ -1,4 +1,7 @@
-﻿const budgetModule = {
+﻿import Vue from "Vue";
+import services from "./../services";
+
+const budgetModule = {
     state: {
         transactionsLoaded: false,
         transactions: []
@@ -11,7 +14,7 @@
             state.transactionsLoaded = value;
         },
         loadTransactions: function (state, transactions) {
-            Vue.set(state, 'transactions', transactions);
+            Vue.set(state, "transactions", transactions);
         }
     },
     actions: {
@@ -23,11 +26,13 @@
                     return;
                 }
 
-                window.setTimeout(function () {
-                    commit("loadTransactions", budgetTransactionResponse.data);
-                    commit("setTransactionsLoadedFlag", true);
-                    resolve(budgetTransactionResponse.data);
-                }, 450);
+                services.transactionService
+                    .getTransactions
+                    .then(() => {
+                        commit("loadTransactions", budgetTransactionResponse.data);
+                        commit("setTransactionsLoadedFlag", true);
+                        resolve(budgetTransactionResponse.data);
+                });
             });
         },
         resetTransactionFlags: function ({commit}) {
