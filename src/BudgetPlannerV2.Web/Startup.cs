@@ -14,7 +14,7 @@ namespace BudgetPlannerV2.Web
         {
             services
                 .RegisterServiceBroker<Broker.DefaultServiceBroker>()
-                .AddControllers();
+                .AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,7 +26,7 @@ namespace BudgetPlannerV2.Web
             }
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

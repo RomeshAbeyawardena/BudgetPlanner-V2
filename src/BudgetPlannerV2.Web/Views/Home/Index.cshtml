@@ -1,0 +1,8 @@
+﻿<div class="container" id="app">
+    <budget-list v-show="!showDetails"
+                 v-on:view:budget="expandTransactions"
+                 :budget-items="budgets"></budget-list>
+    <transaction-list-view v-show="showDetails"
+                           :budget-item="currentBudget"
+                           :transaction-items="currentBudget.transactions"></transaction-list-view>
+</div>
