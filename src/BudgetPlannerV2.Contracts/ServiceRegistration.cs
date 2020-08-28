@@ -1,5 +1,4 @@
-﻿using System;
-using DNI.Core.Contracts;
+﻿using DNI.Core.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BudgetPlannerV2.Contracts

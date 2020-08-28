@@ -3,7 +3,6 @@ using DNI.Core.Contracts;
 using DNI.Core.Services.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace BudgetPlannerV2.Data
 {
@@ -12,11 +11,18 @@ namespace BudgetPlannerV2.Data
         public void RegisterServices(IServiceCollection services)
         {
             services.RegisterRepositories<BudgetPlannerDbContext>(
-                (serviceProvider, dbContextOptionsBuilder) => { 
-                    var applicationSettings = serviceProvider.GetRequiredService<ApplicationSettings>(); 
+                (serviceProvider, dbContextOptionsBuilder) =>
+                {
+                    var applicationSettings = serviceProvider.GetRequiredService<ApplicationSettings>();
                     dbContextOptionsBuilder.UseSqlServer(applicationSettings.DefaultConnectionString);
                 },
-                options => options.UseDbContextPools = true);
+                options =>
+                {
+                    options.UseDbContextPools = true;
+                    options.EnableTracking = false;
+                    options.PoolSize = 256;
+                    options.SingulariseTableNames = true;
+                });
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using DNI.Core.Services.Abstractions;
+﻿using BudgetPlannerV2.Domains.Data;
+using DNI.Core.Services.Abstractions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BudgetPlannerV2.Data
 {
@@ -15,5 +11,7 @@ namespace BudgetPlannerV2.Data
         {
 
         }
+
+        public DbSet<Budget> Budget { get; set; }
     }
 }

@@ -1,18 +1,14 @@
 ﻿using BudgetPlannerV2.Domains;
 using DNI.Core.Contracts;
 using DNI.Core.Contracts.Builders;
-using DNI.Core.Services;
 using DNI.Core.Services.Extensions;
 using DNI.Core.Shared.Enumerations;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BudgetPlannerV2.Services
 {
