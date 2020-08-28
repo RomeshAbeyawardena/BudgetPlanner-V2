@@ -1,9 +1,11 @@
 ﻿import budgetModule from "./budget";
 import transactionModule from "./transaction"
 
-const modules = {
-    budget: budgetModule,
-    transaction: transactionModule
+const modules = (vueInstance) => {
+    return {
+        budget: budgetModule(vueInstance),
+        transaction: transactionModule(vueInstance)
+    }
 }
 
 export default modules;
