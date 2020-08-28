@@ -1,4 +1,6 @@
-﻿export const commonHelper = {
+﻿
+
+export const commonHelper = {
     ready(callback) {
         if (document.readyState !== 'loading') {
             // Document is already ready, call the callback directly

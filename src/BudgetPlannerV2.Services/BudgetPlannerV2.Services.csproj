@@ -1,7 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DNI.Core.Contracts" Version="0.0.0.37" />
+    <PackageReference Include="DNI.Core.Services" Version="0.0.0.37" />
+    <PackageReference Include="DNI.Core.Shared" Version="0.0.0.37" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetPlannerV2.Domains\BudgetPlannerV2.Domains.csproj" />
+  </ItemGroup>
 
 </Project>

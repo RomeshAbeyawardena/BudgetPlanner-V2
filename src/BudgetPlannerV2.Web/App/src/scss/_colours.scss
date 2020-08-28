@@ -1,4 +1,24 @@
-﻿$color-primary: #0F2A50;
-$color-secondary: #2C4870 ;
-$color-light: #92A1B5;
-$color-dark: #031630;
+﻿@import '_variables';
+
+.bg-primary,
+.btn-primary {
+    background-color: $color-primary !important;
+}
+
+.bg-secondary,
+.btn-secondary {
+    background-color: $color-secondary !important;
+}
+
+.bg-light {
+    background-color: $color-light !important;
+}
+
+.table-dark,
+.bg-dark {
+    background-color: $color-dark !important;
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(2n+1) {
+    background-color: rgba(0, 0, 0, 0.08);
+}

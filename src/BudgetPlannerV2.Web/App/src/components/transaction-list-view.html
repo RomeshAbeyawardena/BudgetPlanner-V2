@@ -19,7 +19,7 @@
                     <th class="d-none d-sm-table-cell" scope="row">{{ transaction.id }}</th>
                     <td>{{ transaction.description }}</td>
                     <td>{{ transaction.amount | currency }}</td>
-                    <td class="d-none d-sm-table-cell">{{ transaction.created | customDate('DD MMM YYYY') }}</td>
+                    <td class="d-none d-sm-table-cell">{{ transaction.created | date('DD MMM YYYY HH:mm') }}</td>
                 </tr>
             </tbody>
         </table>

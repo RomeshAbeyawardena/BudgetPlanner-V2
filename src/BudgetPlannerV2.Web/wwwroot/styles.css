@@ -9893,6 +9893,29 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.bg-primary,
+.btn-primary {
+  background-color: #0F2A50 !important;
+}
+
+.bg-secondary,
+.btn-secondary {
+  background-color: #2C4870 !important;
+}
+
+.bg-light {
+  background-color: #92A1B5 !important;
+}
+
+.table-dark,
+.bg-dark {
+  background-color: #031630 !important;
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(2n+1) {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 .spinner .lds-ripple {
   display: inline-block;
   position: relative;
