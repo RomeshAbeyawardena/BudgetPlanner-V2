@@ -7,6 +7,7 @@ namespace BudgetPlannerV2.Domains
         public ApplicationSettings(IConfiguration configuration)
         {
             configuration.Bind(this);
+            DefaultConnectionString = configuration.GetConnectionString("default");
         }
 
         public string DefaultConnectionString { get; set; }

@@ -1,21 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Contracts", "BudgetPlannerV2.Contracts\BudgetPlannerV2.Contracts.csproj", "{A04E15D3-DC17-45C2-9362-515214BB5280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Contracts", "BudgetPlannerV2.Contracts\BudgetPlannerV2.Contracts.csproj", "{A04E15D3-DC17-45C2-9362-515214BB5280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Domains", "BudgetPlannerV2.Domains\BudgetPlannerV2.Domains.csproj", "{F2CC3167-33BF-48C7-90CC-22056B6CF530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Domains", "BudgetPlannerV2.Domains\BudgetPlannerV2.Domains.csproj", "{F2CC3167-33BF-48C7-90CC-22056B6CF530}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Services", "BudgetPlannerV2.Services\BudgetPlannerV2.Services.csproj", "{8C80DD57-CE17-485A-9C29-A2F96C4BEF5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Services", "BudgetPlannerV2.Services\BudgetPlannerV2.Services.csproj", "{8C80DD57-CE17-485A-9C29-A2F96C4BEF5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Web", "BudgetPlannerV2.Web\BudgetPlannerV2.Web.csproj", "{943665C0-B16B-48A0-9750-7DEEE7DABB22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Web", "BudgetPlannerV2.Web\BudgetPlannerV2.Web.csproj", "{943665C0-B16B-48A0-9750-7DEEE7DABB22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.WebApi", "BudgetPlannerV2.WebApi\BudgetPlannerV2.WebApi.csproj", "{4AD38655-B9D8-42C8-9284-29DD23FEDD22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.WebApi", "BudgetPlannerV2.WebApi\BudgetPlannerV2.WebApi.csproj", "{4AD38655-B9D8-42C8-9284-29DD23FEDD22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Data", "BudgetPlannerV2.Data\BudgetPlannerV2.Data.csproj", "{53DE795F-5634-4CF5-A588-D329C1AF2DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Data", "BudgetPlannerV2.Data\BudgetPlannerV2.Data.csproj", "{53DE795F-5634-4CF5-A588-D329C1AF2DE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlannerV2.Broker", "BudgetPlannerV2.Broker\BudgetPlannerV2.Broker.csproj", "{9E896E83-2BC0-467C-9C55-00EB10E92E36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlannerV2.Broker", "BudgetPlannerV2.Broker\BudgetPlannerV2.Broker.csproj", "{9E896E83-2BC0-467C-9C55-00EB10E92E36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{219600D6-F371-4484-8A87-8105FA2C4416}"
+	ProjectSection(SolutionItems) = preProject
+		install.sql = install.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A04E15D3-DC17-45C2-9362-515214BB5280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -114,5 +116,11 @@ Global
 		{9E896E83-2BC0-467C-9C55-00EB10E92E36}.Release|x64.Build.0 = Release|Any CPU
 		{9E896E83-2BC0-467C-9C55-00EB10E92E36}.Release|x86.ActiveCfg = Release|Any CPU
 		{9E896E83-2BC0-467C-9C55-00EB10E92E36}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8ACB9B2-3A86-4A1D-8FAC-9BB0E537262B}
 	EndGlobalSection
 EndGlobal

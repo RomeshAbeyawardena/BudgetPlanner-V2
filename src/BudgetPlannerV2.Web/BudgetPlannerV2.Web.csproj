@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DNI.Core.Contracts" Version="0.0.0.38" />
-    <PackageReference Include="DNI.Core.Services" Version="0.0.0.38" />
-    <PackageReference Include="DNI.Core.Shared" Version="0.0.0.38" />
+    <PackageReference Include="DNI.Core.Contracts" Version="0.0.0.40" />
+    <PackageReference Include="DNI.Core.Services" Version="0.0.0.40" />
+    <PackageReference Include="DNI.Core.Shared" Version="0.0.0.40" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BudgetPlannerV2.Broker\BudgetPlannerV2.Broker.csproj" />
+    <ProjectReference Include="..\BudgetPlannerV2.Domains\BudgetPlannerV2.Domains.csproj" />
   </ItemGroup>
 
 </Project>

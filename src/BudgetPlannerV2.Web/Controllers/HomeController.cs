@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace BudgetPlannerV2.Web.Controllers
 {
-    [Route("{controller}/{action}")]
-    public class HomeController : Controller
+    
+    public class HomeController : DefaultController
     {
+        [Microsoft.AspNetCore.Authorization.Authorize]
         public IActionResult Index()
         {
             ViewBag.Title = "Home";
