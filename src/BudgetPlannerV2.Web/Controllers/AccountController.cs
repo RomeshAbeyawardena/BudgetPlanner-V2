@@ -110,8 +110,8 @@ namespace BudgetPlannerV2.Web.Controllers
                     {
                         throw new UserRegistrationException("Email address or password invalid");
                     }
-
-                    return Ok(await userManager.GenerateEmailConfirmationTokenAsync(user));
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    return Ok(Convert.ToBase64String(token.GetBytes(Encoding.UTF8).ToArray()));
                 }, async(exception) => {
                     await Task.CompletedTask;
                     ModelState.AddModelError("", exception.Message);
@@ -130,18 +130,20 @@ namespace BudgetPlannerV2.Web.Controllers
         }
 
         [HttpGet]
-        [Route("{securityToken}")]
-        public async Task<IActionResult> Verify([FromRoute] string securityToken)
+        [Route("{userToken}:{securityToken}")]
+        public async Task<IActionResult> Verify([FromRoute]string userToken, [FromRoute] string securityToken)
         {
+            
             return await exceptionHandler.TryAsync<string, IActionResult>(securityToken, async (token) =>
             {
+                var secureToken = Convert.FromBase64String(token).GetString(Encoding.UTF8);
 
                 if (!ModelState.IsValid)
                 {
                     throw new UserRegistrationException();
                 }
 
-                var user = await userManager.FindBySecurityTokenAsync(token);
+                var user = await userManager.FindBySecurityTokenAsync(userToken);
 
                 if (user == null)
                 {
@@ -153,7 +155,7 @@ namespace BudgetPlannerV2.Web.Controllers
                     throw new UserRegistrationException("Account already verified");
                 }
 
-                var result = await userManager.ConfirmEmailAsync(user, token);
+                var result = await userManager.ConfirmEmailAsync(user, secureToken);
 
                 if (!result.Succeeded)
                 {
