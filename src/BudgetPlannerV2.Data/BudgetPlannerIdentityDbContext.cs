@@ -45,7 +45,7 @@ namespace BudgetPlannerV2.Data
 
             builder.Entity<Role>(entity =>
             {
-                entity.ToTable("Roles");
+                entity.ToTable("Role");
             });
 
             builder.Entity<IdentityRoleClaim<int>>(entity =>

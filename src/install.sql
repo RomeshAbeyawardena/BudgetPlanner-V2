@@ -111,3 +111,5 @@ CREATE TABLE [RoleClaim] (
         --// Summary:
         --//     Gets or sets the claim value for this claim.
         --public virtual string ClaimValue { get; set; }
+
+        SELECT * FROM dbo.[User]

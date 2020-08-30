@@ -15,6 +15,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using BudgetPlannerV2.Broker.Extensions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BudgetPlannerV2.Web.Controllers
 {
@@ -23,15 +26,13 @@ namespace BudgetPlannerV2.Web.Controllers
         public AccountController(IExceptionHandler exceptionHandler,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IPasswordHasher<User> passwordHasher,
             IModelEncryptionProvider modelEncryptionProvider,
             IMapper mapper)
         {
             this.exceptionHandler = exceptionHandler;
             this.userManager = userManager;
             this.signInManager = signInManager;
-            //userManager.PasswordHasher = passwordHasher;
-            
+
             this.modelEncryptionProvider = modelEncryptionProvider;
             this.mapper = mapper;
         }
@@ -57,7 +58,7 @@ namespace BudgetPlannerV2.Web.Controllers
                 mappedUser.PasswordHash = userManager.PasswordHasher.HashPassword(mappedUser, user.Password);
 
                 var result = await userManager.CreateAsync(mappedUser);
-                
+
                 if (!result.Succeeded)
                 {
                     throw new UserRegistrationException(result.Errors, "Errors occurred");
@@ -65,26 +66,62 @@ namespace BudgetPlannerV2.Web.Controllers
 
                 return Ok(modelEncryptionProvider
                     .Decrypt(await userManager.FindByEmailAsync(user.EmailAddress)));
-            }, async(exception) => { 
+            }, async (exception) =>
+            {
                 await Task.CompletedTask;
                 var userRegistrationException = exception as UserRegistrationException;
 
-                if(!string.IsNullOrEmpty(exception.Message))
-                { 
+                if (!string.IsNullOrEmpty(exception.Message))
+                {
                     ModelState.AddModelError("", exception.Message);
                 }
 
-                if (userRegistrationException.Errors != null && userRegistrationException.Errors.Any())
-                {
-                    foreach(var error in userRegistrationException.Errors)
-                    { 
-                        ModelState.AddModelError("", string.Format("{0}: {1}", error.Code, error.Description));
-                    }   
-                }
+                CaptureIdentityErrorsIntoModelState(ModelState, userRegistrationException.Errors);
 
                 return BadRequest(ModelState);
             }, t => t.DescribeType<UserRegistrationException>());
         }
+
+        [HttpGet]
+        [Route("{emailAddress}")]
+        public IActionResult Confirm([FromRoute] string emailAddress)
+        {
+            return View(new ConfirmViewModel { EmailAddress = emailAddress });
+        }
+
+        [HttpPost]
+        [Route("{emailAddress}")]
+        public async Task<IActionResult> Confirm([FromForm] ConfirmViewModel confirmViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var encryptedUser = modelEncryptionProvider.Encrypt(confirmViewModel);
+
+                var foundUser = await userManager.FindByEmailAsync(encryptedUser.EmailAddress);
+                return await exceptionHandler.TryAsync<User, IActionResult>(foundUser, async(user) =>
+                {
+
+                    if (user == null || await userManager.IsEmailConfirmedAsync(user))
+                    {
+                        throw new UserRegistrationException("User not found or has already been verified");
+                    }
+
+                    if (await userManager.CheckPasswordAsync(user, confirmViewModel.Password) == false)
+                    {
+                        throw new UserRegistrationException("Email address or password invalid");
+                    }
+
+                    return Ok(await userManager.GenerateEmailConfirmationTokenAsync(user));
+                }, async(exception) => {
+                    await Task.CompletedTask;
+                    ModelState.AddModelError("", exception.Message);
+                    return View(confirmViewModel);
+                }, type => type.DescribeType<UserRegistrationException>());
+            }
+
+            return View(confirmViewModel);
+        }
+
 
         [HttpGet]
         public IActionResult Login()
@@ -92,12 +129,60 @@ namespace BudgetPlannerV2.Web.Controllers
             return View(new LoginViewModel());
         }
 
+        [HttpGet]
+        [Route("{securityToken}")]
+        public async Task<IActionResult> Verify([FromRoute] string securityToken)
+        {
+            return await exceptionHandler.TryAsync<string, IActionResult>(securityToken, async (token) =>
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    throw new UserRegistrationException();
+                }
+
+                var user = await userManager.FindBySecurityTokenAsync(token);
+
+                if (user == null)
+                {
+                    throw new UserRegistrationException($"Account with security token {token} not found");
+                }
+
+                if (await userManager.IsEmailConfirmedAsync(user))
+                {
+                    throw new UserRegistrationException("Account already verified");
+                }
+
+                var result = await userManager.ConfirmEmailAsync(user, token);
+
+                if (!result.Succeeded)
+                {
+                    throw new UserRegistrationException(result.Errors, "Unable to validate token");
+                }
+
+                return Ok("Account has been verified");
+            }, async (exception) =>
+            {
+                await Task.CompletedTask;
+                var userRegistrationException = exception as UserRegistrationException;
+
+                if (!string.IsNullOrEmpty(exception.Message))
+                {
+                    ModelState.AddModelError("", exception.Message);
+                }
+
+                return BadRequest(ModelState);
+            }, t => t.DescribeType<UserRegistrationException>());
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(loginViewModel.EmailAddress);
+                var encryptedUser = modelEncryptionProvider.Encrypt(loginViewModel);
+
+                var user = await userManager.FindByEmailAsync(encryptedUser.EmailAddress);
 
                 return await exceptionHandler.TryAsync<User, IActionResult>(user, async (user) =>
                 {
@@ -106,7 +191,7 @@ namespace BudgetPlannerV2.Web.Controllers
                         throw new NullReferenceException("Email address or password invalid");
                     }
 
-                    if (await userManager.IsEmailConfirmedAsync(user))
+                    if (!await userManager.IsEmailConfirmedAsync(user))
                     {
                         throw new UserLoginException(user, "Email address not confirmed");
                     }
@@ -118,6 +203,7 @@ namespace BudgetPlannerV2.Web.Controllers
 
                     if (await userManager.CheckPasswordAsync(user, loginViewModel.Password) == false)
                     {
+                        await userManager.AccessFailedAsync(user);
                         throw new UserLoginException(user, "Email address or password invalid");
                     }
 
@@ -126,6 +212,7 @@ namespace BudgetPlannerV2.Web.Controllers
                     return View(loginViewModel);
                 }, async (exception) =>
                 {
+                    await Task.CompletedTask;
                     ModelState.AddModelError("", exception.Message);
                     return View(loginViewModel);
                 },
@@ -134,6 +221,17 @@ namespace BudgetPlannerV2.Web.Controllers
                     .DescribeType<UserLoginException>());
             }
             return View(loginViewModel);
+        }
+
+        private void CaptureIdentityErrorsIntoModelState(ModelStateDictionary modelState, IEnumerable<IdentityError> errors)
+        {
+            if (errors != null && errors.Any())
+            {
+                foreach (var error in errors)
+                {
+                    modelState.AddModelError("", string.Format("{0}: {1}", error.Code, error.Description));
+                }
+            }
         }
 
         private readonly IExceptionHandler exceptionHandler;
