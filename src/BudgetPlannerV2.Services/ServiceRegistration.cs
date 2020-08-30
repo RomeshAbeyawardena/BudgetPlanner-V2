@@ -4,7 +4,9 @@ using DNI.Core.Contracts;
 using DNI.Core.Contracts.Builders;
 using DNI.Core.Services.Extensions;
 using DNI.Core.Shared.Enumerations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Identity.Core;
 using Scrutor;
 using System;
@@ -20,15 +22,17 @@ namespace BudgetPlannerV2.Services
         {
             services
                 .AddSingleton<ApplicationSettings>()
-                .RegisterServices(BuildSecurityProfiles)
+                .RegisterServices(BuildSecurityProfiles, scannerConfiguration: ConfigureScanner)
                 .RegisterAutoMapperProviders(definitions => definitions.DescribeAssembly<ApplicationSettings>())
                 .RegisterMediatrProviders(definitions => definitions.DescribeAssembly<ServiceRegistration>());
         }
 
-        //private void ConfigureScanner(ITypeSourceSelector typeSelector)
-        //{
-        //    typeSelector.FromAssemblyOf<ServiceRegistration>();
-        //}
+        private void ConfigureScanner(ITypeSourceSelector typeSelector)
+        {
+            typeSelector.FromAssemblyOf<ServiceRegistration>()
+                .AddClasses()
+                .AsImplementedInterfaces();
+        }
 
         private void BuildSecurityProfiles(IServiceProvider serviceProvider, IEncryptionProfileDictionaryBuilder builder)
         {

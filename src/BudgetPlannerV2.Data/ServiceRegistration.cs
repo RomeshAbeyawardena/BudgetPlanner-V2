@@ -25,7 +25,9 @@ namespace BudgetPlannerV2.Data
         private void ConfigureDbContext(IServiceProvider serviceProvider, DbContextOptionsBuilder optionsBuilder)
         {
             var applicationSettings = serviceProvider.GetRequiredService<ApplicationSettings>();
-                optionsBuilder.UseSqlServer(applicationSettings.DefaultConnectionString);
+                optionsBuilder
+                    .UseSqlServer(applicationSettings.DefaultConnectionString)
+                    .EnableSensitiveDataLogging(true);
         }
     }
 }

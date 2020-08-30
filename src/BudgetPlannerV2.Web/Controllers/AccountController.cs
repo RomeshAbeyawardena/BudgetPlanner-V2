@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace BudgetPlannerV2.Web.Controllers
 {
@@ -29,7 +30,8 @@ namespace BudgetPlannerV2.Web.Controllers
             this.exceptionHandler = exceptionHandler;
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.passwordHasher = passwordHasher;
+            //userManager.PasswordHasher = passwordHasher;
+            
             this.modelEncryptionProvider = modelEncryptionProvider;
             this.mapper = mapper;
         }
@@ -52,15 +54,17 @@ namespace BudgetPlannerV2.Web.Controllers
                 }
 
                 var mappedUser = mapper.Map<User>(user);
-                mappedUser.PasswordHash = passwordHasher.HashPassword(mappedUser, user.Password);
-                var result = await userManager.CreateAsync(mappedUser);
+                mappedUser.PasswordHash = userManager.PasswordHasher.HashPassword(mappedUser, user.Password);
 
+                var result = await userManager.CreateAsync(mappedUser);
+                
                 if (!result.Succeeded)
                 {
                     throw new UserRegistrationException(result.Errors, "Errors occurred");
                 }
 
-                return Ok(await userManager.FindByEmailAsync(user.EmailAddress));
+                return Ok(modelEncryptionProvider
+                    .Decrypt(await userManager.FindByEmailAsync(user.EmailAddress)));
             }, async(exception) => { 
                 await Task.CompletedTask;
                 var userRegistrationException = exception as UserRegistrationException;
@@ -135,7 +139,6 @@ namespace BudgetPlannerV2.Web.Controllers
         private readonly IExceptionHandler exceptionHandler;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly IPasswordHasher<User> passwordHasher;
         private readonly IModelEncryptionProvider modelEncryptionProvider;
         private readonly IMapper mapper;
     }

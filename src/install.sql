@@ -17,10 +17,10 @@ CREATE TABLE [dbo].[User] (
     ,[LockoutEnd] DATETIMEOFFSET NULL
     ,[TwoFactorEnabled] BIT NOT NULL
     ,[PhoneNumberConfirmed] BIT NOT NULL
-    ,[PhoneNumber] VARCHAR(20) NULL
-    ,[ConcurrencyStamp] VARCHAR(80) NOT NULL
-    ,[SecurityStamp] VARCHAR(80) NOT NULL
-    ,[PasswordHash] VARCHAR(80) NOT NULL
+    ,[PhoneNumber] VARCHAR(200) NULL
+    ,[ConcurrencyStamp] VARCHAR(200) NOT NULL
+    ,[SecurityStamp] VARCHAR(200) NOT NULL
+    ,[PasswordHash] VARCHAR(200) NOT NULL
     ,[EmailConfirmed] BIT NOT NULL
     ,[NormalizedEmail] VARCHAR(200) NULL
     ,[Email] VARCHAR(200) NOT NULL

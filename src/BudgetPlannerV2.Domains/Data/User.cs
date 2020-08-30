@@ -11,6 +11,8 @@ namespace BudgetPlannerV2.Domains.Data
 {
     public class User : IdentityUser<int>
     {
+        [Encrypt(EncryptionMethod.TwoWay, EncryptionClassification.Personal)]
+        public override string PhoneNumber { get => base.PhoneNumber; set => base.PhoneNumber = value; }
         public override string UserName { get => base.Email; set => base.UserName = value; }
         public override string NormalizedUserName { get => UserName.ToUpper(); set => base.NormalizedUserName = value; }
         [Encrypt(EncryptionMethod.TwoWay, EncryptionClassification.Personal)]
