@@ -18,6 +18,7 @@ mono_crash.*
 
 # Umbraco
 **/Umbraco/
+**/App_Data/TEMP/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

@@ -1,5 +1,6 @@
 ﻿USE master
-
+CREATE DATABASE [Budget_CMS]
+GO
 DROP DATABASE Budget
 GO
 
