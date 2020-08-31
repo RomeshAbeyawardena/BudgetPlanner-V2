@@ -2,6 +2,7 @@
 using BudgetPlannerV2.Cms.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using Umbraco.Web.Mvc;
 namespace BudgetPlannerV2.Cms.Controllers
 {
     
-    public class CmsApiController : SurfaceController
+    public class CmsApiController : ControllerBase
     {
         public CmsApiController()
         {
@@ -24,8 +25,13 @@ namespace BudgetPlannerV2.Cms.Controllers
             var publishedContent = UmbracoContext.GetPublishedContentByType("page");
 
             var pages = publishedContent.Select(page => new Page(page));
-            
-            return Json(pages, JsonRequestBehavior.AllowGet);
+
+            foreach (var page in pages)
+            {
+                Debug.WriteLine(page.Description); 
+            }
+
+            return ToJson(pages);
         }
     }
 }
