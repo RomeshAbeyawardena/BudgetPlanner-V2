@@ -20,7 +20,7 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace BudgetPlannerV2.Cms.ViewModels
 {
-	/// <summary>Form group</summary>
+	/// <summary>Form Group</summary>
 	[PublishedModel("formGroup")]
 	public partial class FormGroup : PublishedContentModel
 	{
@@ -46,24 +46,17 @@ namespace BudgetPlannerV2.Cms.ViewModels
 		// properties
 
 		///<summary>
-		/// Sections
+		/// Form Items
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("sections")]
-		public IEnumerable<FormSection> Sections => this.Value<IEnumerable<FormSection>>("sections");
+		[ImplementPropertyType("formItems")]
+		public IEnumerable<FormItem> FormItems => this.Value<IEnumerable<FormItem>>("formItems");
 
 		///<summary>
-		/// Summary
+		/// Validation Alerts
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("summary")]
-		public IHtmlString Summary => this.Value<IHtmlString>("summary");
-
-		///<summary>
-		/// Title
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("title")]
-		public string Title => this.Value<string>("title");
+		[ImplementPropertyType("validationAlerts")]
+		public IEnumerable<AlertItem> ValidationAlerts => this.Value<IEnumerable<AlertItem>>("validationAlerts");
 	}
 }

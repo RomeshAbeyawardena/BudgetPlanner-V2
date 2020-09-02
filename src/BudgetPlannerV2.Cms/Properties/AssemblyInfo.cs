@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BudgetPlannerV2.Cms")]
+[assembly: AssemblyTitle("BudgetPlanerV2.Cms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BudgetPlannerV2.Cms")]
+[assembly: AssemblyProduct("BudgetPlanerV2.Cms")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d14a0a92-c85e-4241-9d66-69ca040f95c9")]
+[assembly: Guid("1eda4a72-5d98-472a-ae76-ba3f103e0a19")]
 
 // Version information for an assembly consists of the following four values:
 //

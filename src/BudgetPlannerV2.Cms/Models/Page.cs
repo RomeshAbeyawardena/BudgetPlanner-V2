@@ -10,7 +10,8 @@ namespace BudgetPlannerV2.Cms.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public IEnumerable<FormGroup> FormGroups { get; set; }
-        
+        public IEnumerable<Section> Sections { get; set; }
+        public IEnumerable<Link> UsefulLinks { get; set; }
+        public string Summary { get; set; }
     }
 }

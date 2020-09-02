@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D14A0A92-C85E-4241-9D66-69CA040F95C9}</ProjectGuid>
+    <ProjectGuid>{1EDA4A72-5D98-472A-AE76-BA3F103E0A19}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -106,6 +106,9 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.2.10.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -400,11 +403,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />
@@ -426,31 +424,30 @@
     <Content Include="config\Lang\zh-CN.user.xml" />
     <Content Include="config\logviewer.searches.config.js" />
     <Content Include="Global.asax" />
-    <Content Include="Views\MacroPartials\Links.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
-    <Content Include="Views\UsefulLink.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ApplicationEventListenerComponent.cs" />
     <Compile Include="Composers\ApplicationEventListenerComponentComposer.cs" />
-    <Compile Include="Controllers\CmsApiController.cs" />
-    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Extensions\UmbracoContextExtensions.cs" />
-    <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Area.cs" />
     <Compile Include="Models\DomainProfile.cs" />
-    <Compile Include="Models\FormGroup.cs" />
+    <Compile Include="Models\Form.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Alert.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AlertItem.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Area.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ContentBlock.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\File.generated.cs">
@@ -462,10 +459,7 @@
     <Compile Include="ViewModels\FormGroup.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\FormSection.generated.cs">
-      <DependentUpon>Models1.mb</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\FormSectionValidationMessage.generated.cs">
+    <Compile Include="ViewModels\FormItem.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Image.generated.cs">
@@ -477,10 +471,22 @@
     <Compile Include="ViewModels\LinkGroup.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LinkItem.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Member.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Page.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PageSection.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Section.generated.cs">
+      <DependentUpon>Models1.mb</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SectionItem.generated.cs">
       <DependentUpon>Models1.mb</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -498,8 +504,15 @@
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="ViewModels\Models1.mb" />
-    <Content Include="Views\Link.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -524,9 +537,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50832</DevelopmentServerPort>
+          <DevelopmentServerPort>52279</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50832/</IISUrl>
+          <IISUrl>http://localhost:52279/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

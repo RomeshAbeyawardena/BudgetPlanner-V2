@@ -22,7 +22,7 @@ namespace BudgetPlannerV2.Cms.ViewModels
 {
 	/// <summary>Alert</summary>
 	[PublishedModel("alert")]
-	public partial class Alert : PublishedContentModel
+	public partial class Alert : PageSection
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -46,11 +46,11 @@ namespace BudgetPlannerV2.Cms.ViewModels
 		// properties
 
 		///<summary>
-		/// Description
+		/// Sections
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("description")]
-		public IHtmlString Description => this.Value<IHtmlString>("description");
+		[ImplementPropertyType("sections")]
+		public IEnumerable<SectionItem> Sections => this.Value<IEnumerable<SectionItem>>("sections");
 
 		///<summary>
 		/// Title

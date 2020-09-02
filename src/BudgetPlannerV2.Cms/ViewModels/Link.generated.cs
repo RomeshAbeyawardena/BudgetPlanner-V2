@@ -22,7 +22,7 @@ namespace BudgetPlannerV2.Cms.ViewModels
 {
 	/// <summary>Link</summary>
 	[PublishedModel("link")]
-	public partial class Link : LinkGroup
+	public partial class Link : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -46,17 +46,17 @@ namespace BudgetPlannerV2.Cms.ViewModels
 		// properties
 
 		///<summary>
-		/// Url
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("linkUrl")]
-		public string LinkUrl => this.Value<string>("linkUrl");
-
-		///<summary>
 		/// Title
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("title")]
 		public string Title => this.Value<string>("title");
+
+		///<summary>
+		/// Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("usefulLinkUrl")]
+		public string UsefulLinkUrl => this.Value<string>("usefulLinkUrl");
 	}
 }

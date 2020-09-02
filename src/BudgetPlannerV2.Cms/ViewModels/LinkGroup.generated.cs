@@ -20,7 +20,7 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace BudgetPlannerV2.Cms.ViewModels
 {
-	/// <summary>LinkGroup</summary>
+	/// <summary>Link Group</summary>
 	[PublishedModel("linkGroup")]
 	public partial class LinkGroup : PublishedContentModel
 	{
@@ -44,12 +44,5 @@ namespace BudgetPlannerV2.Cms.ViewModels
 		{ }
 
 		// properties
-
-		///<summary>
-		/// Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("categoryName")]
-		public string CategoryName => this.Value<string>("categoryName");
 	}
 }

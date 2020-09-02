@@ -8,7 +8,9 @@ namespace BudgetPlannerV2.Cms.Models
 {
     public class Section
     {
-        public string Label { get; set; }
-        public string Description { get; set; }
+        public string Reference { get; set; }
+        public IEnumerable<Form> Forms { get; set; }
+        public IEnumerable<Link> UsefulLinks { get; set; }
+        public string Summary { get; set; }
     }
 }
